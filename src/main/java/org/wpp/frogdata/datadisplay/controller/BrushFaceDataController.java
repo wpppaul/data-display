@@ -23,12 +23,14 @@ public class BrushFaceDataController {
     private BrushFaceDataService brushFaceDataService;
 
     @PostMapping("/updateBrushFaceData")
+    @CrossOrigin
     public BaseResponse updateBrushFaceData(@RequestParam("file")MultipartFile file){
         BaseResponse baseResponse = brushFaceDataService.updateBrushFaceData(file);
         return baseResponse;
     }
 
     @PostMapping("/selectBrushFaceData")
+    @CrossOrigin
     public BaseResponse selectBrushFaceData(@RequestBody BrushFaceDataDto brushFaceDataDto){
         BaseResponse baseResponse = brushFaceDataService.selectBrushFaceData(brushFaceDataDto);
         return baseResponse;
