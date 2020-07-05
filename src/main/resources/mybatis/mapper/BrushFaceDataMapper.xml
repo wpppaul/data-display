@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wpp.frogdata.datadisplay.dao.BrushFaceDataDao">
+  <resultMap id="BaseResultMap" type="org.wpp.frogdata.datadisplay.model.BrushFaceData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sn_number" jdbcType="VARCHAR" property="snNumber" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="business_number" jdbcType="VARCHAR" property="businessNumber" />
+    <result column="business_name" jdbcType="VARCHAR" property="businessName" />
+    <result column="brush_face_number" jdbcType="VARCHAR" property="brushFaceNumber" />
+    <result column="brush_face_user_number" jdbcType="VARCHAR" property="brushFaceUserNumber" />
+    <result column="brush_face_day_number" jdbcType="VARCHAR" property="brushFaceDayNumber" />
+    <result column="statistics_date" jdbcType="VARCHAR" property="statisticsDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sn_number, area, business_number, business_name, brush_face_number, brush_face_user_number, 
+    brush_face_day_number, statistics_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brush_face_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="org.wpp.frogdata.datadisplay.model.BrushFaceData">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM brush_face_data
+    <where>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(id)">id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(area)">area = #{area,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(snNumber)">and sn_number = #{snNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(businessNumber)">and business_number =#{businessNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(businessName)">and business_name = #{businessName,jdbcType=VARCHAR}</if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(brushFaceNumber)">and brush_face_number = #{brushFaceNumber,jdbcType=VARCHAR}</if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(brushFaceUserNumber)">and brush_face_user_number =
+        #{brushFaceUserNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(brushFaceDayNumber)">and brush_face_day_number = #{brushFaceDayNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(statisticsDate)">and statistics_date =
+        #{statisticsDate,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectBySnOrStatisticsDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+  SELECT
+  <include refid="Base_Column_List"/>
+  FROM brush_face_data
+  <where>
+    <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(snNumber)">and sn_number = #{snNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(statisticsDate)">and statistics_date =
+      #{statisticsDate,jdbcType=VARCHAR}
+    </if>
+    limit #{startIndex},#{endIndex}
+  </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from brush_face_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.wpp.frogdata.datadisplay.model.BrushFaceData" useGeneratedKeys="true">
+    insert into brush_face_data (id,sn_number, area, business_number,
+      business_name, brush_face_number, brush_face_user_number, 
+      brush_face_day_number, statistics_date)
+    values (#{id,jdbcType=VARCHAR},#{snNumber,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{businessNumber,jdbcType=VARCHAR},
+      #{businessName,jdbcType=VARCHAR}, #{brushFaceNumber,jdbcType=VARCHAR}, #{brushFaceUserNumber,jdbcType=VARCHAR}, 
+      #{brushFaceDayNumber,jdbcType=VARCHAR}, #{statisticsDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective"  parameterType="org.wpp.frogdata.datadisplay.model.BrushFaceData" >
+    insert into brush_face_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="snNumber != null">
+        sn_number,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="businessNumber != null">
+        business_number,
+      </if>
+      <if test="businessName != null">
+        business_name,
+      </if>
+      <if test="brushFaceNumber != null">
+        brush_face_number,
+      </if>
+      <if test="brushFaceUserNumber != null">
+        brush_face_user_number,
+      </if>
+      <if test="brushFaceDayNumber != null">
+        brush_face_day_number,
+      </if>
+      <if test="statisticsDate != null">
+        statistics_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="snNumber != null">
+        #{snNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNumber != null">
+        #{businessNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null">
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceNumber != null">
+        #{brushFaceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceUserNumber != null">
+        #{brushFaceUserNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceDayNumber != null">
+        #{brushFaceDayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsDate != null">
+        #{statisticsDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.wpp.frogdata.datadisplay.model.BrushFaceData">
+    update brush_face_data
+    <set>
+      <if test="snNumber != null">
+        sn_number = #{snNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNumber != null">
+        business_number = #{businessNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null">
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceNumber != null">
+        brush_face_number = #{brushFaceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceUserNumber != null">
+        brush_face_user_number = #{brushFaceUserNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="brushFaceDayNumber != null">
+        brush_face_day_number = #{brushFaceDayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsDate != null">
+        statistics_date = #{statisticsDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.wpp.frogdata.datadisplay.model.BrushFaceData">
+    update brush_face_data
+    set sn_number = #{snNumber,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      business_number = #{businessNumber,jdbcType=VARCHAR},
+      business_name = #{businessName,jdbcType=VARCHAR},
+      brush_face_number = #{brushFaceNumber,jdbcType=VARCHAR},
+      brush_face_user_number = #{brushFaceUserNumber,jdbcType=VARCHAR},
+      brush_face_day_number = #{brushFaceDayNumber,jdbcType=VARCHAR},
+      statistics_date = #{statisticsDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectBySnAndStatisticsDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from brush_face_data
+    where sn_number=#{snNumber} and statistics_date=#{statisticsDate}
+  </select>
+  <select id="selectTotalBySnOrStatisticsDate" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM brush_face_data
+    <where>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(snNumber)">and sn_number = #{snNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(statisticsDate)">and statistics_date =#{statisticsDate,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>
