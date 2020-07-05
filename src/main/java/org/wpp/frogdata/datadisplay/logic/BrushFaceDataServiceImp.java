@@ -61,8 +61,7 @@ public class BrushFaceDataServiceImp implements BrushFaceDataService {
             File excelFile = null;
 
             try {
-                String path = (new File(ResourceUtils.getURL("classpath:").getPath()))
-                        .getParentFile().getParentFile().getParent()+File.separator+"uploads"+File.separator;
+                String path = System.getProperty("user.dir")+File.separator+"uploads"+File.separator;
                 excelFile = FileUtils.multipartFileToFile(file,path);
             } catch (Exception e) {
                 e.printStackTrace();
