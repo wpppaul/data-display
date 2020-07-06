@@ -18,9 +18,11 @@ public interface BrushFaceDataDao {
 
     List<BrushFaceData> select(BrushFaceData brushFaceData);
 
-    List<BrushFaceData> selectBySnOrStatisticsDate(@Param("snNumber")String snNumber, @Param("statisticsDate")String statisticsDate,@Param("startIndex")int startIndex, @Param("endIndex")int endIndex);
+    List<BrushFaceData> selectBySnOrStatisticsDate(@Param("snNumber")String snNumber,
+                                                   @Param("startTime")String startTime, @Param("endTime")String endTime,
+                                                   @Param("startIndex")int startIndex, @Param("endIndex")int endIndex);
 
-    int selectTotalBySnOrStatisticsDate(@Param("snNumber")String snNumber, @Param("statisticsDate")String statisticsDate);
+    int selectTotalBySnOrStatisticsDate(@Param("snNumber")String snNumber, @Param("startTime")String startTime, @Param("endTime")String endTime);
 
     int updateByPrimaryKeySelective(BrushFaceData record);
 

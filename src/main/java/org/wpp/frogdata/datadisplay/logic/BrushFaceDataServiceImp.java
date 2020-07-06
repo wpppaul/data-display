@@ -122,9 +122,10 @@ public class BrushFaceDataServiceImp implements BrushFaceDataService {
     public BaseResponse selectBrushFaceData(BrushFaceDataDto brushFaceDataDto) {
         try {
             String snNumber = brushFaceDataDto.getSnNumber();
-            String statisticsDate = brushFaceDataDto.getStatisticsDate();
-            int totalNumber = brushFaceDataDao.selectTotalBySnOrStatisticsDate(snNumber,statisticsDate);
-            List<BrushFaceData> brushFaceDataList = brushFaceDataDao.selectBySnOrStatisticsDate(snNumber,statisticsDate,
+            String startTime = brushFaceDataDto.getStartTime();
+            String endTime =  brushFaceDataDto.getEndTime();
+            int totalNumber = brushFaceDataDao.selectTotalBySnOrStatisticsDate(snNumber,startTime,endTime);
+            List<BrushFaceData> brushFaceDataList = brushFaceDataDao.selectBySnOrStatisticsDate(snNumber,startTime,endTime,
                     (brushFaceDataDto.getPageInfo().getCurrentPage()-1)*brushFaceDataDto.getPageInfo().getPageSize(),brushFaceDataDto.getPageInfo().getPageSize());
             Map<String,Object> resultMap = new HashMap<>();
             resultMap.put("size",totalNumber);

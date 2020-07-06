@@ -58,6 +58,16 @@ public class BrushFaceDataDto {
     private String statisticsDate;
 
     /**
+     * 查询开始日期
+     */
+    private String startTime;
+
+    /**
+     * 查询结束时间日期
+     */
+    private String endTime;
+
+    /**
      * 分页数据
      */
     private PageInfo pageInfo;

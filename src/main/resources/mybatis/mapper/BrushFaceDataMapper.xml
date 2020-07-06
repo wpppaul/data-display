@@ -54,8 +54,11 @@
   <where>
     <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(snNumber)">and sn_number = #{snNumber,jdbcType=VARCHAR}
     </if>
-    <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(statisticsDate)">and statistics_date =
-      #{statisticsDate,jdbcType=VARCHAR}
+    <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(startTime)">and statistics_date &gt;=
+      #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(endTime)">and statistics_date &lt;=
+      #{endTime,jdbcType=VARCHAR}
     </if>
     limit #{startIndex},#{endIndex}
   </where>
@@ -186,7 +189,11 @@
     <where>
       <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(snNumber)">and sn_number = #{snNumber,jdbcType=VARCHAR}
       </if>
-      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(statisticsDate)">and statistics_date =#{statisticsDate,jdbcType=VARCHAR}
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(startTime)">and statistics_date &gt;=
+        #{startTime,jdbcType=VARCHAR}
+      </if>
+      <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(endTime)">and statistics_date &lt;=
+        #{endTime,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
